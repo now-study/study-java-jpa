@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.2">
     <persistence-unit name="jpabook">
         <properties>
             <!-- 필수 속성 -->
@@ -11,7 +11,7 @@
 
             <!-- 옵션 -->
             <!-- 하이버네이트가 실행한 SQL을 출력 -->
-            <property name="hinernate.show_sql" value="true"/>
+            <property name="hibernate.show_sql" value="true"/>
             <!-- 하이버네이트가 실행한 SQL을 출력할 때 정렬해서 -->
             <property name="hibernate.format_sql" value="true"/>
             <!-- 쿼리 출력 시 주석까지 -->
