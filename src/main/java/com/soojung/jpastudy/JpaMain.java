@@ -1,11 +1,13 @@
 package com.soojung.jpastudy;
 
+import com.soojung.jpastudy.entity.Team;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
-import com.soojung.jpastudy.start.Member;
+import com.soojung.jpastudy.entity.Member;
 
+import java.util.Collections;
 import java.util.List;
 
 public class JpaMain {
@@ -52,4 +54,6 @@ public class JpaMain {
         em.remove(member);
 
     }
+
+
 }
