@@ -1,12 +1,12 @@
 package io.github.daeho.example;
 
-import io.github.daeho.study.Member;
+import io.github.daeho.example.model.Member;
+import io.github.daeho.example.model.Order;
+import io.github.daeho.example.model.OrderItem;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
-
-import java.util.List;
 
 public class JpaExampleMain {
 
@@ -19,7 +19,7 @@ public class JpaExampleMain {
 
             try {
                 tx.begin();
-                logic(em);
+                chapter5(em);
                 tx.commit();
             } catch (Exception e) {
                 tx.rollback();
@@ -29,25 +29,48 @@ public class JpaExampleMain {
 
     }
 
-    private static void logic(EntityManager em) {
+    private static void chapter5(EntityManager em) {
 
-        String id = "id1";
-        io.github.daeho.study.Member member = new io.github.daeho.study.Member();
-        member.setId(id);
-        member.setUsername("대호");
-        member.setAge(34);
+        Member member = em.find(Member.class, 1L);
+        System.out.println("[print] member = " + member.getName());
+        member.getOrders()
+                .forEach(o -> System.out.println("[print] orderDates = " + o.getOrderDate()));
+        member.getOrders()
+                .stream()
+                .flatMap(o -> o.getOrderItems().stream())
+                .forEach(o -> System.out.println("[print] orderItemsName = " + o.getItem().getName()));
 
-        em.persist(member);
+        System.out.println("[print] ----------------------------------------");
 
-        member.setAge(35);
+        Order order = em.find(Order.class, 2L);
+        System.out.println("[print] order = " + order.getId());
+        System.out.println("[print] orderMemberName = " + order.getMember().getName());
+        order.getOrderItems()
+                .forEach(o -> System.out.println("[print] orderItemsName = " + o.getItem().getName()));
 
-        io.github.daeho.study.Member findMember = em.find(io.github.daeho.study.Member.class, id);
-        System.out.println("findMember=" + findMember.getUsername() + " , age=" + findMember.getAge());
+        System.out.println("[print] ----------------------------------------");
 
-        List<io.github.daeho.study.Member> members = em.createQuery("select m from Member m", Member.class).getResultList();
-        System.out.println("members.size=" + members.size());
+        OrderItem orderItem = em.find(OrderItem.class, 3L);
+        System.out.println("[print] orderItem = " + orderItem.getId());
+        System.out.println("[print] orderId = " + orderItem.getOrder().getId());
+        System.out.println("[print] orderItemName = " + orderItem.getItem().getName());
+        System.out.println("[print] orderMemberName = " + orderItem.getOrder().getMember().getName());
 
-        em.remove(member);
+        System.out.println("[print] ----------------------------------------");
+
+        Order order2 = em.find(Order.class, 2L);
+        System.out.println("[print] orderMemberName = " + order2.getMember().getName());
+        order2.getOrderItems()
+                .forEach(o -> System.out.println("[print] orderItemsName = " + o.getItem().getName()));
+
+        order2.setMember(em.find(Member.class, 2L));
+        order2.addOrderItem(em.find(OrderItem.class, 4L));
+        order2.addOrderItem(em.find(OrderItem.class, 5L));
+        em.persist(order2);
+
+        System.out.println("[print] orderMemberName = " + order2.getMember().getName());
+        order2.getOrderItems()
+                .forEach(o -> System.out.println("[print] orderItemsName = " + o.getItem().getName()));
 
     }
 }

@@ -11,6 +11,7 @@
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
 
             <!-- 옵션 -->
+            <property name="jakarta.persistence.sql-load-script-source" value="data.sql" />
             <!-- 콘솔에 하이버네이트가 실행하는 SQL문 출력 -->
             <property name="hibernate.show_sql" value="true"/>
             <!-- SQL 출력 시 보기 쉽게 정렬 -->
@@ -21,6 +22,7 @@
             <property name="hibernate.id.new_generator_mappings" value="true"/>
             <!-- 애플리케이션 실행 시점에 데이터베이스 테이블 자동 생성 -->
             <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.hbm2ddl.import_files_sql_extractor" value="org.hibernate.tool.schema.internal.script.MultiLineSqlScriptExtractor" />
             <!-- 이름 매핑 전략 설정 - 자바의 카멜 표기법을 테이블의 언더스코어 표기법으로 매핑 -->
             <property name="hibernate.physical_naming_strategy" value="org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy"/>
         </properties>
