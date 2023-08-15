@@ -5,4 +5,8 @@ JPA (Java Persistence API)는 자바에서의 ORM (Object-Relational Mapping) �
 
 ### 2. JPA 시작
 기본 프로젝트 설정 및 간단한 JPA 예제를 알아본다.
-* [JpaStartMain.java](src/main/java/io/github/daeho/study/jpa/JpaStartMain.java)
+* [JpaStartMain.java](src/main/java/io/github/daeho/study/JpaStartMain.java)
+
+### Reference
+
+* [https://github.com/holyeye/jpabook](https://github.com/holyeye/jpabook)

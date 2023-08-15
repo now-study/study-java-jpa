@@ -1,4 +1,4 @@
-package io.github.daeho.study.jpa;
+package io.github.daeho.study;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,8 +9,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
-@Table(name="Member")
+@Entity(name = "StudyMember")
+@Table(name = "STUDY_MEMBER")
 public class Member {
 
     @Id

@@ -1,4 +1,4 @@
-package io.github.daeho.study.jpa;
+package io.github.daeho.study;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
