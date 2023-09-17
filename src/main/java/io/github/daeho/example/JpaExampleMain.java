@@ -1,5 +1,6 @@
 package io.github.daeho.example;
 
+import io.github.daeho.example.model.entity.Delivery;
 import io.github.daeho.example.model.entity.Member;
 import io.github.daeho.example.model.entity.Order;
 import io.github.daeho.example.model.entity.OrderItem;
@@ -28,7 +29,7 @@ public class JpaExampleMain {
 
             try {
                 tx.begin();
-                chapter7(em);
+                chapter8(em);
                 tx.commit();
             } catch (Exception e) {
                 log.info("e = " + e);
@@ -37,7 +38,7 @@ public class JpaExampleMain {
         }
     }
 
-    private static void chapter7(EntityManager em) {
+    private static void chapter8(EntityManager em) {
 
         Member member = em.find(Member.class, 11L);
         log.info("member = " + member.getName());
@@ -58,6 +59,7 @@ public class JpaExampleMain {
 
         log.info(LINE_SPLIT + "2");
 
+        // Order item insert test
         OrderItem orderItem = new OrderItem();
         orderItem.setItem(em.find(Item.class, 15L));
         orderItem.setOrderPrice(100000);
@@ -78,6 +80,7 @@ public class JpaExampleMain {
 
         log.info(LINE_SPLIT + "4");
 
+        // Album DTYPE insert test
         Album album = new Album();
         album.setName("앨범C");
         album.setPrice(10000);
@@ -86,6 +89,21 @@ public class JpaExampleMain {
         album.setCreatedDate(new Date());
         album.setLastModifiedDate(new Date());
         em.persist(album);
+
+        log.info(LINE_SPLIT + "5");
+
+        // Cascade test
+        Delivery newDelivery = new Delivery();
+        OrderItem newOorderItem = new OrderItem();
+        Order newOrder = new Order();
+
+        order.setDelivery(newDelivery);
+        order.addOrderItem(newOorderItem);
+        em.persist(newOrder);
+
+        // Orphan removal test
+        order.getOrderItems().removeAll(order.getOrderItems());
+        em.persist(order);
 
     }
 }
