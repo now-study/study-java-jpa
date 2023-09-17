@@ -1,5 +1,6 @@
-package io.github.daeho.example.model;
+package io.github.daeho.example.model.entity;
 
+import io.github.daeho.example.model.OrderStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +13,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "ORDERS")
-public class Order {
+public class Order extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name = "ORDER_ID")

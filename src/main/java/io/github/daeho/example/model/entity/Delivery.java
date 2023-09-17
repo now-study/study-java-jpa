@@ -1,5 +1,6 @@
-package io.github.daeho.example.model;
+package io.github.daeho.example.model.entity;
 
+import io.github.daeho.example.model.DeliveryStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Delivery {
+public class Delivery extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name = "DELIVERY_ID")
